@@ -17,7 +17,7 @@ const Login = () => {
     <Grid className="display-center">
       <Paper elevation={8} className="paperStyle">
         <Grid align="center">
-          <h2>
+          <h2 data-testid="header">
             <span className="txtStyle">F</span>
             <span className="txtStyle2">u</span>
             <span className="txtStyle">n</span>
