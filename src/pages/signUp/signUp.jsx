@@ -60,7 +60,7 @@ const SignUp = () => {
     <Grid className="display-center">
       <Paper elevation={20} className="paperStyleSignUP">
         <Grid align="center">
-          <h2 className="headerMargin">
+          <h2 className="headerMargin" data-testid="titleForSignup">
             <span className="txtStyle">F</span>
             <span className="txtStyle2">u</span>
             <span className="txtStyle">n</span>
@@ -71,11 +71,14 @@ const SignUp = () => {
             <span className="txtStyle">t</span>
             <span className="txtStyle2">e</span>
           </h2>
-          <h2 className="headerStyle">Sign Up</h2>
+          <h2 className="headerStyle" data-testid="headerForSignup">
+            Sign Up
+          </h2>
           <Typography
             className="margin-topBottom"
             variant="caption"
             gutterBottom
+            data-testid="capionForSignup"
           >
             Please fill this form to create an account !
           </Typography>
@@ -86,12 +89,13 @@ const SignUp = () => {
           onSubmit={onSubmitSignUP}
         >
           {(props) => (
-            <Form>
+            <Form data-testid="formForSignUp">
               <Field
                 as={TextField}
                 fullWidth
                 label="First Name"
                 name="FirstName"
+                data-testid="FirstNameSignUp"
                 variant="outlined"
                 className="bottomMargin"
                 helperText={<ErrorMessage name="FirstName" />}
@@ -101,6 +105,7 @@ const SignUp = () => {
                 fullWidth
                 label="Last Name"
                 name="LastName"
+                data-testid="LastNameSignUp"
                 variant="outlined"
                 className="bottomMargin"
                 helperText={<ErrorMessage name="LastName" />}
@@ -110,6 +115,7 @@ const SignUp = () => {
                 fullWidth
                 label="Email"
                 name="Email"
+                data-testid="EmailSignUp"
                 variant="outlined"
                 className="bottomMargin"
                 helperText={<ErrorMessage name="Email" />}
@@ -145,6 +151,7 @@ const SignUp = () => {
                 fullWidth
                 label="Phone Number"
                 name="PhoneNumber"
+                data-testid="PhoneNumberSignUp"
                 variant="outlined"
                 className="bottomMargin"
                 helperText={<ErrorMessage name="PhoneNumber" />}
@@ -155,6 +162,7 @@ const SignUp = () => {
                 variant="outlined"
                 label="Password"
                 name="Password"
+                data-testid="PasswordSignUp"
                 type="password"
                 helperText={<ErrorMessage name="Password" />}
                 className="bottomMargin"
@@ -166,6 +174,7 @@ const SignUp = () => {
                 variant="outlined"
                 label="confirm Password"
                 name="confirmPassword"
+                data-testid="confirmPasswordSignUp"
                 type="password"
                 helperText={<ErrorMessage name="confirmPassword" />}
                 className="bottomMargin"
