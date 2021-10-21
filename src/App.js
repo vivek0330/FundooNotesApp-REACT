@@ -1,12 +1,12 @@
 /* eslint-disable no-undef */
 import "./App.css";
 import Login from "./pages/login/login";
-import SignUp from "./pages/signUp/signUp";
+import SignUp from "./pages/signUp/SignUp";
 
 function App() {
   return (
     <div>
-      {/* <Login /> */}
+      <Login />
       <SignUp />
     </div>
   );

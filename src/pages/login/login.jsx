@@ -41,7 +41,7 @@ const Login = () => {
     <Grid className="display-center">
       <Paper elevation={8} className="paperStyle">
         <Grid align="center">
-          <h2 data-testid="header">
+          <h2 data-testid="title">
             <span className="txtStyle">F</span>
             <span className="txtStyle2">u</span>
             <span className="txtStyle">n</span>
@@ -52,7 +52,7 @@ const Login = () => {
             <span className="txtStyle">t</span>
             <span className="txtStyle2">e</span>
           </h2>
-          <h2>Sign In</h2>
+          <h2 data-testid="signIn">Sign In</h2>
         </Grid>
         <Formik
           initialValues={initialValues}
@@ -60,9 +60,10 @@ const Login = () => {
           onSubmit={onSubmits}
         >
           {(props) => (
-            <Form>
+            <Form data-testid="form">
               <Field
                 as={TextField}
+                data-testid="email"
                 label="Email"
                 name="Email"
                 variant="outlined"
@@ -73,6 +74,7 @@ const Login = () => {
               <Field
                 as={TextField}
                 label="Password"
+                data-testid="password"
                 name="Password"
                 variant="outlined"
                 type="password"
@@ -81,6 +83,7 @@ const Login = () => {
               />
 
               <Button
+                data-testid="submit"
                 type="submit"
                 color="primary"
                 variant="contained"
@@ -99,7 +102,7 @@ const Login = () => {
         </Typography>
         <Typography>
           Do you have an account ?
-          <Link href="#">
+          <Link href="/SignUp">
             <span> Create account </span>
           </Link>
         </Typography>
