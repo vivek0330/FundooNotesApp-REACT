@@ -11,15 +11,28 @@ import react from "react";
 import "./login.scss";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field, ErrorMessage, useField } from "formik";
 import * as Yup from "yup";
 
 const Login = () => {
+  const initialValues = {
+    Email: "",
+    Password: "",
+    checkedB: "",
+  };
+
+  const onSubmits = (values, props) => {
+    console.log(values);
+    console.log(props);
+  };
+
   const validationSchema = Yup.object().shape({
     Email: Yup.string()
       .email("Please Enter valid Email !!")
       .required("Email is required !!"),
-    password: Yup.string().required("Required"),
+    Password: Yup.string()
+      .min(6, "Password must be at least 6 characters")
+      .required("Password is required"),
   });
 
   return (
@@ -40,12 +53,9 @@ const Login = () => {
           <h2>Sign In</h2>
         </Grid>
         <Formik
-          initialValues={{ Email: "", Password: "" }}
-          onSubmit={(value, props) => {
-            console.log(value);
-            console.log(props);
-          }}
+          initialValues={initialValues}
           validationSchema={validationSchema}
+          onSubmit={onSubmits}
         >
           {(props) => (
             <Form>
@@ -55,11 +65,9 @@ const Login = () => {
                 name="Email"
                 variant="outlined"
                 fullWidth
-                required
                 className="tfStyle"
                 helperText={<ErrorMessage name="Email" />}
               />
-
               <Field
                 as={TextField}
                 label="Password"
@@ -67,7 +75,7 @@ const Login = () => {
                 variant="outlined"
                 type="password"
                 fullWidth
-                required
+                helperText={<ErrorMessage name="Password" />}
               />
               <Field
                 as={FormControlLabel}
@@ -91,7 +99,6 @@ const Login = () => {
           <Link href="#">Forgot password</Link>
         </Typography>
         <Typography>
-          {" "}
           Do you have an account ?
           <Link href="#">
             <span> Create account </span>
