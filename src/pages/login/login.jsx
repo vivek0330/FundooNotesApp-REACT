@@ -9,7 +9,6 @@ import {
 } from "@material-ui/core";
 import react from "react";
 import "./login.scss";
-
 import { Formik, Form, Field, ErrorMessage, useField } from "formik";
 import * as Yup from "yup";
 
@@ -19,10 +18,14 @@ const Login = () => {
     Password: "",
   };
 
-  const onSubmits = (values, { resetForm }) => {
+  const onSubmits = (values, props) => {
     console.log(values);
-    // console.log(props);
-    resetForm({ values: "" });
+    // props.resetForm();
+    setTimeout(() => {
+      props.resetForm();
+      props.setSubmitting(false);
+    }, 2000);
+    console.log(props);
   };
 
   const validationSchema = Yup.object().shape({
@@ -83,8 +86,9 @@ const Login = () => {
                 variant="contained"
                 className="buttonStyle"
                 fullWidth
+                disabled={props.isSubmitting}
               >
-                Sign in
+                {props.isSubmitting ? "Loading" : "Sign in"}
               </Button>
             </Form>
           )}
