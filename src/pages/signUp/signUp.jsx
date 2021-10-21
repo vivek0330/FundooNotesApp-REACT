@@ -1,6 +1,5 @@
 import React from "react";
 import { Grid, Paper, Typography, TextField, Button } from "@material-ui/core";
-import AddCircleOutLineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOutlined";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -10,9 +9,6 @@ import "./sinUp.scss";
 import Checkbox from "@material-ui/core/Checkbox";
 const SignUp = () => {
   const paperStyle = { padding: "30px 20px", width: 380, margin: "20px auto" };
-
-  const btstyle = { margin: "12px 0" };
-  const marginTop = { marginTop: 10 };
   return (
     <Grid className="display-center">
       <Paper elevation={20} style={paperStyle}>
@@ -38,14 +34,30 @@ const SignUp = () => {
           </Typography>
         </Grid>
         <form>
-          <TextField fullWidth label="First Name" variant="outlined" />
-          <TextField fullWidth label="Last Name" variant="outlined" />
-          <TextField fullWidth label="Email" variant="outlined" />
-          <FormControl component="fieldset" style={marginTop}>
+          <TextField
+            fullWidth
+            label="First Name"
+            variant="outlined"
+            className="bottomMargin"
+          />
+          <TextField
+            fullWidth
+            label="Last Name"
+            variant="outlined"
+            className="bottomMargin"
+          />
+          <TextField
+            fullWidth
+            label="Email"
+            variant="outlined"
+            className="bottomMargin"
+          />
+          <FormControl component="fieldset">
             <FormLabel component="legend">Gender</FormLabel>
             <RadioGroup
               aria-label="gender"
               name="gender"
+              defaultValue="female"
               style={{ display: "initial" }}
             >
               <FormControlLabel
@@ -61,19 +73,23 @@ const SignUp = () => {
               />
             </RadioGroup>
           </FormControl>
-          <TextField fullWidth label="Phone Number" variant="outlined" />
-          <TextField fullWidth variant="outlined" label="Password" />
+          <TextField
+            fullWidth
+            label="Phone Number"
+            variant="outlined"
+            className="bottomMargin"
+          />
+          <TextField
+            fullWidth
+            variant="outlined"
+            label="Password"
+            className="bottomMargin"
+          />
           <FormControlLabel
             control={<Checkbox name="checkedA" />}
             label="I accept the terms and condition."
           />
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            style={btstyle}
-            fullWidth
-          >
+          <Button type="submit" variant="contained" color="primary" fullWidth>
             Sign Up
           </Button>
         </form>
