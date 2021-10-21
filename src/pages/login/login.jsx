@@ -7,7 +7,7 @@ import {
   Typography,
   Link,
 } from "@material-ui/core";
-import react from "react";
+import React from "react";
 import "./login.scss";
 import { Formik, Form, Field, ErrorMessage, useField } from "formik";
 import * as Yup from "yup";
