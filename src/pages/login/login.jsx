@@ -9,8 +9,7 @@ import {
 } from "@material-ui/core";
 import react from "react";
 import "./login.scss";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
+
 import { Formik, Form, Field, ErrorMessage, useField } from "formik";
 import * as Yup from "yup";
 
@@ -18,12 +17,12 @@ const Login = () => {
   const initialValues = {
     Email: "",
     Password: "",
-    checkedB: "",
   };
 
-  const onSubmits = (values, props) => {
+  const onSubmits = (values, { resetForm }) => {
     console.log(values);
-    console.log(props);
+    // console.log(props);
+    resetForm({ values: "" });
   };
 
   const validationSchema = Yup.object().shape({
@@ -77,11 +76,7 @@ const Login = () => {
                 fullWidth
                 helperText={<ErrorMessage name="Password" />}
               />
-              <Field
-                as={FormControlLabel}
-                control={<Checkbox name="checkedB" color="primary" />}
-                label="Remember me"
-              />
+
               <Button
                 type="submit"
                 color="primary"
