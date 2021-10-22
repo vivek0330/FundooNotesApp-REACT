@@ -1,22 +1,48 @@
 .headerStyle {
   margin-bottom: 10px;
   margin-top: 0;
-}
-
-.headerMargin {
-  margin-top: 0;
-  margin-bottom: 0 !important;
+  font-size: 20px;
+  font-weight: 400;
 }
 
 .bottomMargin {
-  margin-bottom: 10px !important;
+  padding-bottom: 10px !important;
 }
 
 .paperStyleSignUP {
-  padding: 20px 20px;
-  margin: 20px auto;
+  padding: 20px 20px 30px 30px;
+  margin: auto;
   border-radius: 10px !important;
   width: auto;
-  max-width: 380px;
+  max-width: 900px;
   min-width: 100px;
+}
+
+.IMG {
+  margin-top: 80px;
+  width: 75%;
+  margin-left: 100px;
+}
+
+.imgContain {
+  margin-left: 125px;
+  margin-top: -10px;
+}
+
+.setText {
+  margin-left: 10px;
+  color: #5f6368;
+  margin-top: -12px;
+  font-size: 12px;
+  margin-bottom: 10px;
+  font-weight: 400;
+}
+
+.setText1 {
+  margin-left: 18px;
+  color: #5f6368;
+  margin-top: -18px;
+  font-size: 12px;
+  margin-bottom: 10px;
+  font-weight: 400;
 }
