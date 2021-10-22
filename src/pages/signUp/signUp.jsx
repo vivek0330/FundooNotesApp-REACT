@@ -7,6 +7,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { FormHelperText } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import Title from "../title";
 
 const SignUp = () => {
   const initialValuesSignUp = {
@@ -51,17 +52,7 @@ const SignUp = () => {
         <Grid container spacing={2}>
           <Grid item sm={6} md={6}>
             <Grid>
-              <h2 data-testid="titleForSignup">
-                <span className="txtStyle">F</span>
-                <span className="txtStyle2">u</span>
-                <span className="txtStyle">n</span>
-                <span className="txtStyle3">d</span>
-                <span className="txtStyle">o</span>
-                <span className="txtStyle2"> N</span>
-                <span className="txtStyle3">o</span>
-                <span className="txtStyle">t</span>
-                <span className="txtStyle2">e</span>
-              </h2>
+              <Title />
               <h2 className="headerStyle" data-testid="headerForSignup">
                 Create your Fundo Account
               </h2>
