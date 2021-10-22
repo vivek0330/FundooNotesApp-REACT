@@ -1,20 +1,18 @@
 import React from "react";
 import { Grid, Paper, TextField, Button, Typography } from "@material-ui/core";
-
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import "./sinUp.scss";
 import * as Yup from "yup";
 import Checkbox from "@material-ui/core/Checkbox";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { FormHelperText } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 const SignUp = () => {
   const initialValuesSignUp = {
     FirstName: "",
     LastName: "",
     Email: "",
-    Gender: "",
-    PhoneNumber: "",
     Password: "",
     ConfirmPassword: "",
     termAndCondition: false,
@@ -38,12 +36,6 @@ const SignUp = () => {
     Email: Yup.string()
       .email("Please Enter valid Email !!")
       .required("Email is required !!"),
-    Gender: Yup.string()
-      .oneOf(["male", "female"], "Required")
-      .required("Required"),
-    PhoneNumber: Yup.number()
-      .typeError("Enter valid phone Number")
-      .required("Required"),
     Password: Yup.string()
       .min(8, "Password must be at least 6 characters")
       .required("Password is required"),
@@ -175,6 +167,10 @@ const SignUp = () => {
                       >
                         Sign Up
                       </Button>
+                      <Typography className="marginTop">
+                        Already have an account ?{" "}
+                        <Link to="/login"> Login</Link>
+                      </Typography>
                     </Grid>
                   </Grid>
                 </Form>

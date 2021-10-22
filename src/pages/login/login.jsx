@@ -1,16 +1,10 @@
 // eslint-disable-next-line
-import {
-  Grid,
-  Paper,
-  TextField,
-  Button,
-  Typography,
-  Link,
-} from "@material-ui/core";
+import { Grid, Paper, TextField, Button, Typography } from "@material-ui/core";
 import React from "react";
 import "./login.scss";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const initialValues = {
@@ -101,8 +95,8 @@ const Login = () => {
           <Link href="#">Forgot password</Link>
         </Typography>
         <Typography>
-          Do you have an account ?
-          <Link href="/SignUp">
+          Create a new account ?
+          <Link to="/SignUp">
             <span> Create account </span>
           </Link>
         </Typography>
