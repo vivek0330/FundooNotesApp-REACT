@@ -5,7 +5,7 @@ import "./login.scss";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
-import Title from "../title";
+import Title from "../../component/title/title";
 
 const Login = () => {
   const initialValues = {

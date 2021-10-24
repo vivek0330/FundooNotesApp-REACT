@@ -1,6 +1,5 @@
-import http from "../../src/http-common";
+import http from "../component/http/http-common";
 
 export const register = (userDetails) => {
-  console.log(userDetails);
   return http.post("/register", userDetails);
 };

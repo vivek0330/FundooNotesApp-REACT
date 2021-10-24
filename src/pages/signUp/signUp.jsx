@@ -4,8 +4,10 @@ import "./sinUp.scss";
 import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Link, useHistory } from "react-router-dom";
-import Title from "../title";
+import Title from "../../component/title/title";
 import { register } from "../../Services/user";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignUp = () => {
   const history = useHistory();
@@ -29,17 +31,17 @@ const SignUp = () => {
     };
     register(userDetails)
       .then((res) => {
-        alert("Data is submitted");
-        history.push("/login");
+        // alert("Data submitted");
+        setTimeout(() => {
+          history.push("/login");
+        }, 5000);
+        toast.success("data submitted successfully ✔", {
+          position: "top-center",
+        });
       })
       .catch((error) => {
         console.log(error);
       });
-
-    // setTimeout(() => {
-    //   props.resetForm();
-    //   props.setSubmitting(false);
-    // }, 2000);
   };
 
   const validationSchemaSignUp = Yup.object().shape({
@@ -156,6 +158,7 @@ const SignUp = () => {
                   <Grid container spacing={0}>
                     <Grid item sm={12}>
                       <Button
+                        onClick={onSubmitSignUP}
                         type="submit"
                         variant="contained"
                         color="primary"
@@ -183,6 +186,7 @@ const SignUp = () => {
           </Grid>
         </Grid>
       </Paper>
+      <ToastContainer />
     </Grid>
   );
 };
