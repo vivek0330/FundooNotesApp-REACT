@@ -4,6 +4,7 @@ import Login from "./pages/login/login";
 import SignUp from "./pages/signUp/SignUp";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Dashboard from "./pages/dashboard/dashboard";
+import Forgot from "./pages/forgotPasword/forgot";
 
 function App() {
   return (
@@ -12,6 +13,9 @@ function App() {
         {/* <Login />
       <SignUp /> */}
         <Switch>
+          <Route path="/forgot">
+            <Forgot />
+          </Route>
           <Route path="/dashboard">
             <Dashboard />
           </Route>
