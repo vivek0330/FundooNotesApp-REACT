@@ -1,30 +1,45 @@
 import React from "react";
 import { Grid, Paper, TextField, Button, Typography } from "@material-ui/core";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 import "./sinUp.scss";
 import * as Yup from "yup";
-import Checkbox from "@material-ui/core/Checkbox";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { FormHelperText } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Title from "../title";
+import { register } from "../../Services/user";
 
 const SignUp = () => {
+  const history = useHistory();
+
   const initialValuesSignUp = {
     FirstName: "",
     LastName: "",
     Email: "",
     Password: "",
     ConfirmPassword: "",
-    termAndCondition: false,
   };
 
   const onSubmitSignUP = (values, props) => {
     console.log(values);
-    setTimeout(() => {
-      props.resetForm();
-      props.setSubmitting(false);
-    }, 2000);
+    // if (values && !values.FirstName && !values.LastName) return;
+    const userDetails = {
+      firstName: values.FirstName,
+      lastName: values.LastName,
+      email: values.Email,
+      password: values.Password,
+    };
+    register(userDetails)
+      .then((res) => {
+        alert("Data is submitted");
+        history.push("/login");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    // setTimeout(() => {
+    //   props.resetForm();
+    //   props.setSubmitting(false);
+    // }, 2000);
   };
 
   const validationSchemaSignUp = Yup.object().shape({
@@ -40,10 +55,9 @@ const SignUp = () => {
     Password: Yup.string()
       .min(8, "Password must be at least 6 characters")
       .required("Password is required"),
-    confirmPassword: Yup.string()
+    ConfirmPassword: Yup.string()
       .oneOf([Yup.ref("Password")], "Password doesn't matched")
-      .required("Required"),
-    termAndCondition: Yup.string().oneOf(["true"], "Accept terms & condition"),
+      .required("Confirm password should match password"),
   });
 
   return (
@@ -126,11 +140,11 @@ const SignUp = () => {
                         as={TextField}
                         fullWidth
                         variant="outlined"
-                        label="confirm Password"
-                        name="confirmPassword"
+                        label="Confirm Password"
+                        name="ConfirmPassword"
                         data-testid="confirmPasswordSignUp"
                         type="password"
-                        helperText={<ErrorMessage name="confirmPassword" />}
+                        helperText={<ErrorMessage name="ConfirmPassword" />}
                         className="bottomMargin"
                       />
                     </Grid>
@@ -141,15 +155,6 @@ const SignUp = () => {
                   </Grid>
                   <Grid container spacing={0}>
                     <Grid item sm={12}>
-                      <FormControlLabel
-                        control={
-                          <Field as={Checkbox} name="termAndCondition" />
-                        }
-                        label="I accept the terms and condition."
-                      />
-                      <FormHelperText>
-                        <ErrorMessage name="termAndCondition" />
-                      </FormHelperText>
                       <Button
                         type="submit"
                         variant="contained"

@@ -55,4 +55,5 @@ it("givenTestIdElement_WhenRenderedLogin_shouldPasswordInTheDocument", () => {
   const { getByTestId } = render(<Login />);
   const password = getByTestId("password");
   expect(password).toBeInTheDocument();
+  // expect(password).toHaveErrorMessage();
 });

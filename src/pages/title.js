@@ -15,6 +15,7 @@ class Title extends React.Component {
           <span className="txtStyle3">o</span>
           <span className="txtStyle">t</span>
           <span className="txtStyle2">e</span>
+          <span className="txtStyle2">s</span>
         </h2>
       </Grid>
     );

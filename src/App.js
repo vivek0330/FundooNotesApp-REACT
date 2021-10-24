@@ -11,11 +11,11 @@ function App() {
         {/* <Login />
       <SignUp /> */}
         <Switch>
-          <Route path="/login">
-            <Login />
-          </Route>
           <Route path="/SignUp">
             <SignUp />
+          </Route>
+          <Route path="/">
+            <Login />
           </Route>
         </Switch>
       </div>
