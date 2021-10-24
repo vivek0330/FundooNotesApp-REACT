@@ -4,8 +4,11 @@ import React from "react";
 import "./login.scss";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Title from "../../component/title/title";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { login } from "../../Services/user";
 
 const Login = () => {
   const initialValues = {
@@ -13,14 +16,27 @@ const Login = () => {
     Password: "",
   };
 
+  const history = useHistory();
+
   const onSubmits = (values, props) => {
     console.log(values);
-    // props.resetForm();
-    setTimeout(() => {
-      props.resetForm();
-      props.setSubmitting(false);
-    }, 2000);
-    // console.log(props);
+    const data = {
+      email: values.Email,
+      password: values.Password,
+    };
+    login(data)
+      .then((res) => {
+        // alert("Data submitted");
+        setTimeout(() => {
+          history.push("/dashboard");
+        }, 5000);
+        toast.success("login successfully ✔", {
+          position: "top-center",
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const validationSchema = Yup.object().shape({
@@ -92,6 +108,7 @@ const Login = () => {
           </Link>
         </Typography>
       </Paper>
+      <ToastContainer />
     </Grid>
   );
 };
