@@ -21,6 +21,8 @@ import DnsRoundedIcon from "@material-ui/icons/DnsRounded";
 import ReplayOutlinedIcon from "@material-ui/icons/ReplayOutlined";
 import ListItem from "@material-ui/core/ListItem";
 import InputBase from "@material-ui/core/InputBase";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 // import ListItem from "@material-ui/core/ListItem";
 import AppsRoundedIcon from "@material-ui/icons/AppsRounded";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -222,8 +224,13 @@ export default function Dashboard(props) {
   };
 
   const logOut = () => {
-    localStorage.removeItem("token");
-    nextPath("../login");
+    setTimeout(() => {
+      localStorage.removeItem("token");
+      nextPath("../login");
+    }, 2000);
+    toast.success("logout successfully ✔", {
+      position: "top-center",
+    });
   };
 
   return (
@@ -490,6 +497,7 @@ export default function Dashboard(props) {
           </div>
         </main>
       </div>
+      <ToastContainer />
     </div>
   );
 }
