@@ -4,7 +4,7 @@
   border-radius: 10px !important;
   width: 450px;
   min-width: 100px;
-  height: 80vh;
+  height: 50vh;
 }
 
 .fontDesign {
@@ -13,6 +13,18 @@
 
 .buttonStyle1 {
   margin: 15px 0px !important;
-  width: 100px !important;
+  width: 50px !important;
   float: right;
+}
+
+.buttonStyle11 {
+  margin: 20px 0px 15px !important;
+}
+
+.textDecoration:hover {
+  color: blue;
+}
+
+.textDecoration {
+  text-decoration: unset !important;
 }
