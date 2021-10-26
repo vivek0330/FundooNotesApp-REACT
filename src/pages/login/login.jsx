@@ -27,8 +27,7 @@ const Login = () => {
     login(data)
       .then((res) => {
         localStorage.setItem("token", res.data.token);
-        const token1 = localStorage.getItem("token");
-        console.log(token1);
+        // localStorage.getItem("token");
         setTimeout(() => {
           history.push("/dashboard");
         }, 5000);
