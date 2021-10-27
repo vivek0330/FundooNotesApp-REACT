@@ -23,15 +23,14 @@ import ListItem from "@material-ui/core/ListItem";
 import InputBase from "@material-ui/core/InputBase";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// import ListItem from "@material-ui/core/ListItem";
 import AppsRoundedIcon from "@material-ui/icons/AppsRounded";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import AccountCircleOutlinedIcon from "@material-ui/icons/AccountCircle";
 import { useHistory } from "react-router-dom";
-// import ProtectedRoutes from "../protectedRouter";
-//import { Route, Switch } from "react-router-dom";
-// import Notes from "../../component/CreateNote/notes";
+import ProtectedRoutes from "../../component/protectedRouter";
+import { Switch } from "react-router-dom";
+import Notes from "../../component/createNote/Notes";
 // import ProtectedRoutes from "../../component/ProtectedRoutes/protectedRoute";
 
 const useStyles = makeStyles((theme) => ({
@@ -491,11 +490,11 @@ export default function Dashboard(props) {
 
         <main className={classes.main}>
           <div className={classes.content}>
-            {/* <Switch>
+            <Switch>
               <ProtectedRoutes path="/dashboard/notes">
                 <Notes search={search} />
               </ProtectedRoutes>
-            </Switch> */}
+            </Switch>
           </div>
         </main>
       </div>
