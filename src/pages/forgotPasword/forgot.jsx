@@ -75,6 +75,7 @@ export default class Hello extends React.Component {
       let data = {
         email: this.state.email,
       };
+      localStorage.setItem("email", this.state.email);
       Services.forgotPassword(data)
         .then((data) => {
           let obj = JSON.stringify(data);

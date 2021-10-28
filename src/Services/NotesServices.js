@@ -2,7 +2,6 @@ import Axios from "axios";
 
 // Axios.defaults.baseURL = "http://localhost:8080";
 
-// const token = localStorage.getItem("token");
 // const header = {
 //   headers: {
 //     token: token,
@@ -29,6 +28,11 @@ class UserNoteServices {
 
   static forgotPassword = (data) => {
     return Axios.post("http://localhost:8080/forgotPassword", data);
+  };
+
+  static resetPassword = (data, token) => {
+    console.log("token -> ", token);
+    return Axios.post("http://localhost:8080/reset-Password", data, token);
   };
 }
 
