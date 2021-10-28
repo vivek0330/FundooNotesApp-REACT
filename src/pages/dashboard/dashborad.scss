@@ -77,13 +77,12 @@
 .buttonContainer {
   display: flex;
 }
-@import url(https://fonts.googleapis.com/css?family=Pacifico);
 
 .headerTitle {
   margin: 3%;
   color: #5f6368;
   font-size: x-large;
-  font-family: "Pacifico";
+  font-family: "Product Sans", Arial, sans-serif;
 }
 .search {
   margin: 5px 5px 5px 5px;
@@ -101,10 +100,10 @@
   margin-left: 3%;
 }
 
-.MuiPaper-root.MuiMenu-paper.MuiPopover-paper.MuiPaper-elevation8.MuiPaper-rounded {
-  top: 32px !important;
-  right: 5px;
-}
+// .MuiPaper-root.MuiMenu-paper.MuiPopover-paper.MuiPaper-elevation8.MuiPaper-rounded {
+//   top: 32px !important;
+//   right: 5px;
+// }
 .searchInput {
   margin-left: 2%;
   width: 80%;

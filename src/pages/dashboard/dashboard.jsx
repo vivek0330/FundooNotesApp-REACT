@@ -358,13 +358,6 @@ export default function Dashboard(props) {
                           style={{ fontSize: 65 }}
                         />
                       </MenuItem>
-                      <MenuItem>
-                        {localStorage.getItem("fundooUserFName")}{" "}
-                        {localStorage.getItem("fundooUserLName")}
-                      </MenuItem>
-                      <MenuItem>
-                        {localStorage.getItem("fundooUserEmail")}{" "}
-                      </MenuItem>
                       <MenuItem
                         onClick={logOut}
                         className={classes.profileIcon}
@@ -492,7 +485,7 @@ export default function Dashboard(props) {
           <div className={classes.content}>
             <Switch>
               <ProtectedRoutes path="/dashboard/notes">
-                <Notes search={search} />
+                <Notes />
               </ProtectedRoutes>
             </Switch>
           </div>

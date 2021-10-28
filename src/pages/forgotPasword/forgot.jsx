@@ -1,99 +1,158 @@
 import React from "react";
-import { Grid, Paper, TextField, Button, Typography } from "@material-ui/core";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import "./forgot.scss";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import "../forgotPasword/forgot.scss";
+import Services from "../../Services/NotesServices";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
 import Title from "../../component/title/title";
-import { useHistory, Link } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { forgot } from "../../Services/user";
+import { Grid, Paper, Typography } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
-const Forgot = () => {
-  const initialValues = {
-    Email: "",
-  };
+function Alert(props) {
+  return <MuiAlert variant="filled" {...props} />;
+}
 
-  const history = useHistory();
-
-  const onSubmits = (values, props) => {
-    console.log(values);
-    const data = {
-      email: values.Email,
+export default class Hello extends React.Component {
+  nextPath(path) {
+    this.props.history.push(path);
+  }
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: "",
+      emailError: "",
+      emailFlag: false,
+      setOpen: false,
+      open: false,
+      snackMessage: "",
+      snackType: "",
     };
-    forgot(data)
-      .then((res) => {
-        // alert("Data submitted");
-        setTimeout(() => {
-          props.resetForm();
-          history.push("#");
-        }, 2000);
-        toast.success("Email forgot password link sent succesfully ✔", {
-          position: "top-center",
-          autoClose: 2000,
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  }
+
+  change = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
   };
 
-  const validationSchema = Yup.object().shape({
-    Email: Yup.string()
-      .email("Please Enter valid Email !!")
-      .required("Email is required !!"),
-  });
+  validate = () => {
+    let isError = false;
+    const errors = {
+      emailError: "",
+      emailFlag: false,
+    };
+    if (this.state.email.length === 0) {
+      errors.emailFlag = true;
+      isError = true;
+      errors.emailError = "Enter your Email ";
+    }
+    if (
+      !/[a-zA-Z0-9._]+[@]{1}[a-zA-Z120-9]*[.]{1}[a-zA-Z]*$/.test(
+        this.state.email
+      )
+    ) {
+      errors.emailFlag = true;
+      isError = true;
+      errors.emailError = "Email is not proper";
+    }
+    this.setState({
+      ...errors,
+    });
 
-  return (
-    <Grid className="display-center">
-      <Paper elevation={8} className="paperStyleFP">
-        <Grid align="center">
-          <Title />
-          <h3 className="fontDesign">Find your email</h3>
-          <h4 className="fontDesign">Enter your recovery email</h4>
-        </Grid>
-        <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={onSubmits}
-        >
-          {(props) => (
-            <Form>
-              <Field
-                as={TextField}
-                label="Email"
-                name="Email"
-                variant="outlined"
-                fullWidth
+    return isError;
+  };
+
+  onSubmit = (e, props) => {
+    e.preventDefault();
+    const err = this.validate();
+    if (!err) {
+      this.setState({
+        emailFlag: false,
+        emailError: "",
+        email: "",
+      });
+      let data = {
+        email: this.state.email,
+      };
+      Services.forgotPassword(data)
+        .then((data) => {
+          let obj = JSON.stringify(data);
+          console.log("Mail Sended to given email" + obj);
+          this.setState({
+            snackType: "success",
+            snackMessage: "Mail Sended to given email",
+            open: true,
+            setOpen: true,
+          });
+        })
+        .catch((err) => {
+          this.setState({
+            snackType: "error",
+            snackMessage: "Request Failed",
+            open: true,
+            setOpen: true,
+          });
+        });
+    } else {
+      console.log("Request Failed");
+    }
+
+    //props.resetForm();
+  };
+
+  render() {
+    return (
+      <Grid className="display-center">
+        <Paper elevation={8} className="paperStyleFP">
+          <Grid align="center">
+            <Title />
+            <h3 className="fontDesign">Find your email</h3>
+            <h4 className="fontDesign">Enter your recovery email</h4>
+          </Grid>
+          <form>
+            <Grid>
+              <TextField
                 className="tfStyle"
-                helperText={<ErrorMessage name="Email" />}
+                label="Email"
+                variant="outlined"
+                name="email"
+                fullWidth
+                value={this.state.email}
+                helperText={this.state.emailError}
+                error={this.state.emailFlag}
+                onChange={(e) => this.change(e)}
               />
-              <Grid container spacing={0}>
-                <Grid sm={6}>
-                  <Typography className="buttonStyle11 ">
-                    <Link className="textDecoration" to="/SignUp">
-                      sign in instead ?
-                    </Link>
-                  </Typography>
-                </Grid>
-                <Grid container className="buttonStyle1" sm={6}>
-                  <Button
-                    type="submit"
-                    color="primary"
-                    variant="contained"
-                    fullWidth
-                  >
-                    Next
-                  </Button>
-                </Grid>
+            </Grid>
+            <Grid container spacing={0}>
+              <Grid sm={6}>
+                <Typography className="buttonStyle11 ">
+                  <Link className="textDecoration" to="/SignUp">
+                    sign in instead ?
+                  </Link>
+                </Typography>
               </Grid>
-            </Form>
-          )}
-        </Formik>
-      </Paper>
-      <ToastContainer />
-    </Grid>
-  );
-};
-
-export default Forgot;
+              <Grid container className="buttonStyle1" sm={6}>
+                <Button
+                  variant="contained"
+                  onClick={(e) => this.onSubmit(e)}
+                  color="primary"
+                  fullWidth
+                >
+                  Send
+                </Button>
+              </Grid>
+            </Grid>
+          </form>
+        </Paper>
+        <div>
+          <Snackbar open={this.state.open} autoHideDuration={3000}>
+            <Alert severity={this.state.snackType}>
+              {this.state.snackMessage}
+            </Alert>
+          </Snackbar>
+        </div>
+      </Grid>
+    );
+  }
+}

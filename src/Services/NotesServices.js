@@ -26,6 +26,10 @@ class UserNoteServices {
       headers: { Authorization: `Bearer ${token}` },
     });
   };
+
+  static forgotPassword = (data) => {
+    return Axios.post("http://localhost:8080/forgotPassword", data);
+  };
 }
 
 export default UserNoteServices;

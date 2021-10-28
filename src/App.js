@@ -5,6 +5,7 @@ import SignUp from "./pages/signUp/SignUp";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Dashboard from "./pages/dashboard/dashboard";
 import Forgot from "./pages/forgotPasword/forgot";
+import resetpassword from "./pages/ResetPassword/resetPassword";
 // import ErrorPage from "../src/component/errorPage";
 import ProtectedRoute from "../src/component/protectedRouter";
 
@@ -20,6 +21,7 @@ function App() {
           ></ProtectedRoute>
           <Route path="/login" component={Login} />
           <Route path="/SignUp" component={SignUp} />
+          <Route path="/resetpassword" component={resetpassword} />
           <Route path="/" component={Login} />
           {/* <Route component={ErrorPage} /> */}
         </Switch>

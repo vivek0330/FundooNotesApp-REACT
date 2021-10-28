@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-no-duplicate-props */
 import React from "react";
 import InputBase from "@material-ui/core/InputBase";
@@ -11,7 +12,6 @@ import Services from "../../Services/NotesServices";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./addNotes.scss";
-// const service = new Services();
 
 const useStyles = makeStyles((theme) => ({
   titleInput: {
@@ -36,15 +36,16 @@ export default function AddNote(props) {
   var [showTitle, titleDisplay] = React.useState(props.editOpen);
   var [title, setTitle] = React.useState(props.editTitle);
   var [note, setNote] = React.useState(props.editDisc);
-  const [edit] = React.useState(props.setEdited);
+  const [edit, setEdit] = React.useState(props.setEdited);
   const [clr, setClr] = React.useState(props.editColor);
-  //const [noteId] = React.useState(props.editId);
-  const [archive] = React.useState(props.archive);
-  const [trash] = React.useState(props.trash);
-  const [takeNote] = React.useState(true);
+  const [noteId, setNoteId] = React.useState(props.editId);
+  const [archive, setArchive] = React.useState(props.archive);
+  const [trash, setTrash] = React.useState(props.trash);
+  const [takeNote, setTakeNote] = React.useState(true);
 
   const clickedNote = () => {
     titleDisplay(true);
+    console.log("i m in ");
   };
 
   const closeNote = () => {
@@ -55,15 +56,13 @@ export default function AddNote(props) {
     };
     Services.addNote(formval)
       .then((data) => {
-        toast.success("Notes created");
         console.log("Add Notes: " + data);
+        toast.success("Notes created");
         props.getall();
       })
       .catch((err) => {
-        toast.error("Note not created");
+        console.log("Error = " + err);
       });
-
-    //let formData = new FormData();
 
     if (title === undefined && note === undefined) {
       console.log("Please Enter Data");
@@ -71,46 +70,6 @@ export default function AddNote(props) {
       titleDisplay(false);
       return null;
     }
-    // formData.append("title", title);
-    // console.log("title", title);
-    // formData.append("description", note);
-    //   const formval = {
-    //    title: title,
-    //    description : note
-    // }
-
-    // if (edit) {
-    //   //setClr(props.editColor);
-    //   // formData.append("color", clr);
-    //   formData.append("noteId", noteId);
-    //   Services.updateNotes(formData)
-    //     .then((data) => {
-    //       console.log("Update Data: " + data);
-    //       props.getall();
-    //     })
-    //     .catch((err) => {
-    //       console.log("Update Data Error = " + err);
-    //     });
-    //   titleDisplay(false);
-    //   props.dialogOff();
-    // } else {
-    //   // formData.append("color", clr);
-    //   // console.log("addnote",formData);
-    //   Services.addNote(formData);
-    //   console
-    //     .log("else part ::" + formData)
-    //     .then((data) => {
-    //       console.log("Add Notes: " + data);
-    //       props.getall();
-    //     })
-    //     .catch((err) => {
-    //       console.log("Error = " + err);
-    //     });
-    //   setTitle("");
-    //   setNote("");
-    //   setClr("#fafafa");
-    //   titleDisplay(false);
-    // }
   };
 
   return (

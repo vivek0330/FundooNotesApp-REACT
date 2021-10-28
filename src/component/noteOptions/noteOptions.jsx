@@ -23,18 +23,13 @@ const useStyles = makeStyles((theme) => ({
   optionButton: {
     width: "100%",
   },
-  //   colorPaper: {
-  //     marginLeft: theme.spacing(5),
-  //   },
+  colorPaper: {
+    marginLeft: theme.spacing(5),
+  },
   button: {
     padding: "6px",
   },
-  colorMenu: {
-    width: "130px",
-    height: "90px",
-    display: "flex",
-    flexFlow: " column wrap",
-  },
+
   colorButton: {
     margin: "2px",
     width: "5px",
@@ -54,25 +49,22 @@ export default function NoteOptions(props) {
   const [open] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [anchorE2, setAnchorE2] = React.useState(null);
-  const [noteId] = React.useState(props.editId);
-  //const [edit, setEdit] = React.useState(props.setEdited);
-  const [archive] = React.useState(props.archive);
   const [trash] = React.useState(props.trash);
 
-  //   const colors = [
-  //     { color: "#fafafa" },
-  //     { color: "#ef9a9a" },
-  //     { color: "#ffcc80" },
-  //     { color: "#fff59d" },
-  //     { color: "#dcedc8" },
-  //     { color: "#b2dfdb" },
-  //     { color: "#e0f7fa" },
-  //     { color: "#4fc3f7" },
-  //     { color: "#b39ddb" },
-  //     { color: "#f8bbd0" },
-  //     { color: "#a1887f" },
-  //     { color: "#cfd8dc" },
-  //   ];
+  const colors = [
+    { color: "#fafafa" },
+    { color: "#ef9a9a" },
+    { color: "#ffcc80" },
+    { color: "#fff59d" },
+    { color: "#dcedc8" },
+    { color: "#b2dfdb" },
+    { color: "#e0f7fa" },
+    { color: "#4fc3f7" },
+    { color: "#b39ddb" },
+    { color: "#f8bbd0" },
+    { color: "#a1887f" },
+    { color: "#cfd8dc" },
+  ];
 
   const deleteHandleOpen = (event) => {
     setAnchorE2(event.currentTarget);
@@ -82,68 +74,30 @@ export default function NoteOptions(props) {
     setAnchorE2(null);
   };
 
-  //   const deleted = () => {
-  //     let data = {
-  //       noteIdList: [notesId],
-  //       isDeleted: true,
-  //       //isArchived: false,
-  //     };
-  //     Services.deleteNotes(data)
-  //       .then((data) => {
-  //         console.log(data);
-  //         //props.getall();
-  //       })
-  //       .catch((err) => {
-  //         console.log("error = " + err);
-  //       });
-  //     setAnchorE2(null);
-  //     // props.setDelete();
-  //   };
-
-  const deleted = () => {
-    let data = {
-      notesId: [noteId],
-    };
-    console.log("dlt", data);
-    console.log("dlted", noteId);
-    Services.deleteForever(data)
-      .then((data) => {
-        console.log("Note deleted " + data);
-        props.getall();
-      })
-      .catch((err) => {
-        console.log("Error while deleting" + err);
-      });
+  const colorsHandleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+    console.log("setE1 :: ", event.currentTarget);
   };
 
-  //   const colorsHandleClick = (event) => {
-  //     setAnchorEl(event.currentTarget);
-  //   };
+  const colorsHandleClose = () => {
+    setAnchorEl(null);
+    console.log("setAnchorEl ::", setAnchorEl(null));
+  };
 
-  //   const colorsHandleClose = () => {
-  //     setAnchorEl(null);
-  //   };
-
-  //   const passColor = (e, colr) => {};
-
-  const archiveNote = () => {};
-
-  const restore = () => {};
-
-  const unArchiveNote = () => {};
+  const passColor = (e, colr) => {};
 
   const ColorBlock = () => {
-    // return (
-    //   <div className={classes.colorMenu} onMouseLeave={colorsHandleClose}>
-    //     {colors.map((color) => (
-    //       <IconButton
-    //         className={classes.colorButton}
-    //         onClick={(e) => passColor(e, color.color)}
-    //         style={{ backgroundColor: color.color }}
-    //       ></IconButton>
-    //     ))}
-    //   </div>
-    // );
+    return (
+      <div className="colorMenu" onClick={colorsHandleClose}>
+        {colors.map((color) => (
+          <IconButton
+            className={classes.colorButton}
+            onClick={(e) => passColor(e, color.color)}
+            style={{ backgroundColor: color.color }}
+          ></IconButton>
+        ))}
+      </div>
+    );
   };
 
   return (
@@ -151,36 +105,23 @@ export default function NoteOptions(props) {
       <div>
         {trash ? (
           <div>
-            {/* <IconButton className={classes.button}>
-              <DeleteForeverRoundedIcon onClick={deleted}/>
-            </IconButton> */}
             <IconButton className={classes.button}>
-              <RestoreFromTrashRoundedIcon onClick={restore} />
+              {/* <DeleteForeverRoundedIcon onClick={deleted} /> */}
             </IconButton>
           </div>
         ) : (
           <div className="optionfield">
-            <IconButton className={classes.button}>
+            {/* <IconButton className={classes.button}>
               <AddAlertIcon />
             </IconButton>
             <IconButton className={classes.button}>
               <PersonAddIcon />
-            </IconButton>
-            <IconButton
-              //   onMouseOver={colorsHandleClick}
-              className={classes.button}
-            >
+            </IconButton> */}
+            <IconButton onClick={colorsHandleClick} className={classes.button}>
               <ColorLensOutlinedIcon />
             </IconButton>
             <IconButton className={classes.button}>
               <ImageOutlinedIcon />
-            </IconButton>
-            <IconButton className={classes.button}>
-              {archive ? (
-                <PublishRoundedIcon onClick={unArchiveNote} />
-              ) : (
-                <SystemUpdateAltOutlinedIcon onClick={archiveNote} />
-              )}
             </IconButton>
             <IconButton className={classes.button} onClick={deleteHandleOpen}>
               <MoreVertOutlinedIcon />
@@ -191,7 +132,7 @@ export default function NoteOptions(props) {
       <div
         className={classes.colorWindow}
         style={{ display: open ? "block" : "none" }}
-        // onClick={colorsHandleClose}
+        onClick={colorsHandleClose}
       >
         <Paper open={Boolean(open)}>
           <Menu
@@ -212,7 +153,7 @@ export default function NoteOptions(props) {
             open={Boolean(anchorE2)}
             onClose={deletesHandleClose}
           >
-            <MenuItem onClick={deleted}>Delete</MenuItem>
+            {/* <MenuItem onClick={deleted}>Delete</MenuItem> */}
           </Menu>
         </Paper>
       </div>
