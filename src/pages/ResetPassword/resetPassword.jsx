@@ -134,9 +134,11 @@ export default class forgotPassword extends React.Component {
               <font color="#e53935">o</font>
             </b>
           </span>
-          <span className="signIn">Reset Password</span>
+          <span className="signIn" data-testid="resetPassword">
+            Reset Password
+          </span>
           Use your Fundoo Account
-          <form className="Form">
+          <form className="Form" data-testid="form">
             <div className="inputField">
               <TextField
                 size="small"
@@ -145,6 +147,7 @@ export default class forgotPassword extends React.Component {
                 type="password"
                 variant="outlined"
                 name="password"
+                data-testid="password"
                 value={this.state.password}
                 onChange={(e) => this.change(e)}
                 error={this.state.passwordFlag}

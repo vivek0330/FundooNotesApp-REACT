@@ -3,7 +3,7 @@ import { Grid, Paper, TextField, Button, Typography } from "@material-ui/core";
 import "./sinUp.scss";
 import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, BrowserRouter as Router } from "react-router-dom";
 import Title from "../../component/title/title";
 import { register } from "../../Services/user";
 import { ToastContainer, toast } from "react-toastify";
@@ -63,131 +63,133 @@ const SignUp = () => {
   });
 
   return (
-    <Grid className="display-center">
-      <Paper elevation={20} className="paperStyleSignUP">
-        <Grid container spacing={2}>
-          <Grid item sm={6} md={6}>
-            <Grid>
-              <Title />
-              <h2 className="headerStyle" data-testid="headerForSignup">
-                Create your Fundo Account
-              </h2>
-            </Grid>
-            <Formik
-              initialValues={initialValuesSignUp}
-              validationSchema={validationSchemaSignUp}
-              onSubmit={onSubmitSignUP}
-            >
-              {(props) => (
-                <Form data-testid="formForSignUp">
-                  <Grid container spacing={2}>
-                    <Grid item sm={6}>
-                      <Field
-                        as={TextField}
-                        fullWidth
-                        label="First Name"
-                        name="FirstName"
-                        data-testid="FirstNameSignUp"
-                        variant="outlined"
-                        className="bottomMargin"
-                        helperText={<ErrorMessage name="FirstName" />}
-                      />
-                    </Grid>
-                    <Grid item sm={6}>
-                      <Field
-                        as={TextField}
-                        fullWidth
-                        label="Last Name"
-                        name="LastName"
-                        data-testid="LastNameSignUp"
-                        variant="outlined"
-                        className="bottomMargin"
-                        helperText={<ErrorMessage name="LastName" />}
-                      />
-                    </Grid>
-                  </Grid>
-                  <Grid container spacing={0}>
-                    <Grid item sm={12}>
-                      <Field
-                        as={TextField}
-                        fullWidth
-                        label="Email"
-                        name="Email"
-                        data-testid="EmailSignUp"
-                        variant="outlined"
-                        className="bottomMargin"
-                        helperText={<ErrorMessage name="Email" />}
-                      />
-                      <Grid className="setText">
-                        You can use letters, numbers &amp; periods
+    <Router>
+      <Grid className="display-center">
+        <Paper elevation={20} className="paperStyleSignUP">
+          <Grid container spacing={2}>
+            <Grid item sm={6} md={6}>
+              <Grid>
+                <Title />
+                <h2 className="headerStyle" data-testid="headerForSignup">
+                  Create your Fundo Account
+                </h2>
+              </Grid>
+              <Formik
+                initialValues={initialValuesSignUp}
+                validationSchema={validationSchemaSignUp}
+                onSubmit={onSubmitSignUP}
+              >
+                {(props) => (
+                  <Form data-testid="formForSignUp">
+                    <Grid container spacing={2}>
+                      <Grid item sm={6}>
+                        <Field
+                          as={TextField}
+                          fullWidth
+                          label="First Name"
+                          name="FirstName"
+                          data-testid="FirstNameSignUp"
+                          variant="outlined"
+                          className="bottomMargin"
+                          helperText={<ErrorMessage name="FirstName" />}
+                        />
+                      </Grid>
+                      <Grid item sm={6}>
+                        <Field
+                          as={TextField}
+                          fullWidth
+                          label="Last Name"
+                          name="LastName"
+                          data-testid="LastNameSignUp"
+                          variant="outlined"
+                          className="bottomMargin"
+                          helperText={<ErrorMessage name="LastName" />}
+                        />
                       </Grid>
                     </Grid>
-                  </Grid>
-                  <Grid container spacing={2}>
-                    <Grid item sm={6}>
-                      <Field
-                        as={TextField}
-                        fullWidth
-                        variant="outlined"
-                        label="Password"
-                        name="Password"
-                        data-testid="PasswordSignUp"
-                        type="password"
-                        helperText={<ErrorMessage name="Password" />}
-                        className="bottomMargin"
-                      />
+                    <Grid container spacing={0}>
+                      <Grid item sm={12}>
+                        <Field
+                          as={TextField}
+                          fullWidth
+                          label="Email"
+                          name="Email"
+                          data-testid="EmailSignUp"
+                          variant="outlined"
+                          className="bottomMargin"
+                          helperText={<ErrorMessage name="Email" />}
+                        />
+                        <Grid className="setText">
+                          You can use letters, numbers &amp; periods
+                        </Grid>
+                      </Grid>
                     </Grid>
-                    <Grid item sm={6}>
-                      <Field
-                        as={TextField}
-                        fullWidth
-                        variant="outlined"
-                        label="Confirm Password"
-                        name="ConfirmPassword"
-                        data-testid="confirmPasswordSignUp"
-                        type="password"
-                        helperText={<ErrorMessage name="ConfirmPassword" />}
-                        className="bottomMargin"
-                      />
+                    <Grid container spacing={2}>
+                      <Grid item sm={6}>
+                        <Field
+                          as={TextField}
+                          fullWidth
+                          variant="outlined"
+                          label="Password"
+                          name="Password"
+                          data-testid="PasswordSignUp"
+                          type="password"
+                          helperText={<ErrorMessage name="Password" />}
+                          className="bottomMargin"
+                        />
+                      </Grid>
+                      <Grid item sm={6}>
+                        <Field
+                          as={TextField}
+                          fullWidth
+                          variant="outlined"
+                          label="Confirm Password"
+                          name="ConfirmPassword"
+                          data-testid="confirmPasswordSignUp"
+                          type="password"
+                          helperText={<ErrorMessage name="ConfirmPassword" />}
+                          className="bottomMargin"
+                        />
+                      </Grid>
+                      <Grid className="setText1">
+                        Use 8 or more characters with a mix of letters, numbers
+                        & symbols
+                      </Grid>
                     </Grid>
-                    <Grid className="setText1">
-                      Use 8 or more characters with a mix of letters, numbers &
-                      symbols
+                    <Grid container spacing={0}>
+                      <Grid item sm={12}>
+                        <Button
+                          onClick={onSubmitSignUP}
+                          type="submit"
+                          variant="contained"
+                          color="primary"
+                          fullWidth
+                        >
+                          Sign Up
+                        </Button>
+                        <Typography className="marginTop">
+                          Already have an account ?{" "}
+                          <Link to="/login"> Login</Link>
+                        </Typography>
+                      </Grid>
                     </Grid>
-                  </Grid>
-                  <Grid container spacing={0}>
-                    <Grid item sm={12}>
-                      <Button
-                        onClick={onSubmitSignUP}
-                        type="submit"
-                        variant="contained"
-                        color="primary"
-                        fullWidth
-                      >
-                        Sign Up
-                      </Button>
-                      <Typography className="marginTop">
-                        Already have an account ?{" "}
-                        <Link to="/login"> Login</Link>
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                </Form>
-              )}
-            </Formik>
+                  </Form>
+                )}
+              </Formik>
+            </Grid>
+            <Grid item sm={6} md={6}>
+              <img
+                className="IMG"
+                src="https://ssl.gstatic.com/accounts/signup/glif/account.svg"
+                alt=""
+              />
+              <p className="imgContain">Quick Notes, To-do List, Reminders</p>
+            </Grid>
           </Grid>
-          <Grid item sm={6} md={6}>
-            <img
-              className="IMG"
-              src="https://ssl.gstatic.com/accounts/signup/glif/account.svg"
-              alt=""
-            />
-            <p className="imgContain">Quick Notes, To-do List, Reminders</p>
-          </Grid>
-        </Grid>
-      </Paper>
-      <ToastContainer />
-    </Grid>
+        </Paper>
+        <ToastContainer />
+      </Grid>
+    </Router>
   );
 };
 

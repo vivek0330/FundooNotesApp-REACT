@@ -7,7 +7,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import Title from "../../component/title/title";
 import { Grid, Paper, Typography } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 
 function Alert(props) {
   return <MuiAlert variant="filled" {...props} />;
@@ -104,56 +104,63 @@ export default class Hello extends React.Component {
 
   render() {
     return (
-      <Grid className="display-center">
-        <Paper elevation={8} className="paperStyleFP">
-          <Grid align="center">
-            <Title />
-            <h3 className="fontDesign">Find your email</h3>
-            <h4 className="fontDesign">Enter your recovery email</h4>
-          </Grid>
-          <form>
-            <Grid>
-              <TextField
-                className="tfStyle"
-                label="Email"
-                variant="outlined"
-                name="email"
-                fullWidth
-                value={this.state.email}
-                helperText={this.state.emailError}
-                error={this.state.emailFlag}
-                onChange={(e) => this.change(e)}
-              />
+      <Router>
+        <Grid className="display-center">
+          <Paper elevation={8} className="paperStyleFP">
+            <Grid align="center">
+              <Title />
+              <h3 className="fontDesign" data-testid="header1">
+                Find your email
+              </h3>
+              <h4 className="fontDesign" data-testid="header2">
+                Enter your recovery email
+              </h4>
             </Grid>
-            <Grid container spacing={0}>
-              <Grid sm={6}>
-                <Typography className="buttonStyle11 ">
-                  <Link className="textDecoration" to="/SignUp">
-                    sign in instead ?
-                  </Link>
-                </Typography>
-              </Grid>
-              <Grid container className="buttonStyle1" sm={6}>
-                <Button
-                  variant="contained"
-                  onClick={(e) => this.onSubmit(e)}
-                  color="primary"
+            <form data-testid="form">
+              <Grid>
+                <TextField
+                  className="tfStyle"
+                  label="Email"
+                  data-testid="email"
+                  variant="outlined"
+                  name="email"
                   fullWidth
-                >
-                  Send
-                </Button>
+                  value={this.state.email}
+                  helperText={this.state.emailError}
+                  error={this.state.emailFlag}
+                  onChange={(e) => this.change(e)}
+                />
               </Grid>
-            </Grid>
-          </form>
-        </Paper>
-        <div>
-          <Snackbar open={this.state.open} autoHideDuration={3000}>
-            <Alert severity={this.state.snackType}>
-              {this.state.snackMessage}
-            </Alert>
-          </Snackbar>
-        </div>
-      </Grid>
+              <Grid container spacing={0}>
+                <Grid sm={6}>
+                  <Typography className="buttonStyle11 ">
+                    <Link className="textDecoration" to="/SignUp">
+                      sign in instead ?
+                    </Link>
+                  </Typography>
+                </Grid>
+                <Grid container className="buttonStyle1" sm={6}>
+                  <Button
+                    variant="contained"
+                    onClick={(e) => this.onSubmit(e)}
+                    color="primary"
+                    fullWidth
+                  >
+                    Send
+                  </Button>
+                </Grid>
+              </Grid>
+            </form>
+          </Paper>
+          <div>
+            <Snackbar open={this.state.open} autoHideDuration={3000}>
+              <Alert severity={this.state.snackType}>
+                {this.state.snackMessage}
+              </Alert>
+            </Snackbar>
+          </div>
+        </Grid>
+      </Router>
     );
   }
 }
