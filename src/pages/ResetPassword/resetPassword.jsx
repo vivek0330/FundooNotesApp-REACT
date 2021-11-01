@@ -1,11 +1,12 @@
 /* eslint-disable no-undef */
 import React from "react";
-import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Services from "../../Services/NotesServices";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
+import Title from "../../component/title/title";
 import "./resetPassword.scss";
+import { Grid, Paper, TextField } from "@material-ui/core";
 //const service = new Services();
 
 function Alert(props) {
@@ -122,31 +123,23 @@ export default class forgotPassword extends React.Component {
 
   render() {
     return (
-      <div className="main">
-        <div elevation={0} className="page">
-          <span className="inlineTitle">
-            <b>
-              <font color="#1976d2">F</font>
-              <font color="#e53935">u</font>
-              <font color="#ffb74d">n</font>
-              <font color="#1976d2">d</font>
-              <font color="#388e3c">o</font>
-              <font color="#e53935">o</font>
-            </b>
-          </span>
-          <span className="signIn" data-testid="resetPassword">
-            Reset Password
-          </span>
-          Use your Fundoo Account
+      <Grid className="display-center">
+        <Paper elevation={8} className="paperStyle">
+          <Grid align="center">
+            <Title />
+            <h2>Reset Password</h2>
+            <h3>Use your Fundoo Account</h3>
+          </Grid>
           <form className="Form" data-testid="form">
             <div className="inputField">
               <TextField
                 size="small"
-                className="input"
+                className="tfStyle"
                 label="Password"
                 type="password"
                 variant="outlined"
                 name="password"
+                fullWidth
                 data-testid="password"
                 value={this.state.password}
                 onChange={(e) => this.change(e)}
@@ -157,10 +150,10 @@ export default class forgotPassword extends React.Component {
             <div className="inputField">
               <TextField
                 size="small"
-                className="input"
                 label="Conform"
                 variant="outlined"
                 type="password"
+                fullWidth
                 name="confirmPassword"
                 value={this.state.confirmPassword}
                 helperText={this.state.confirmPasswordError}
@@ -168,19 +161,20 @@ export default class forgotPassword extends React.Component {
                 onChange={(e) => this.change(e)}
               />
             </div>
-            <span className="buttonFooter">
-              <div className="button">
+            <span className="buttonFooter1">
+              <div>
                 <Button
                   variant="contained"
                   onClick={(e) => this.onSubmit(e)}
                   color="primary"
+                  fullWidth
                 >
                   Set Password
                 </Button>
               </div>
             </span>
           </form>
-        </div>
+        </Paper>
         <div>
           <Snackbar open={this.state.open} autoHideDuration={3000}>
             <Alert severity={this.state.snackType}>
@@ -188,7 +182,7 @@ export default class forgotPassword extends React.Component {
             </Alert>
           </Snackbar>
         </div>
-      </div>
+      </Grid>
     );
   }
 }
