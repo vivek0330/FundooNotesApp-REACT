@@ -61,6 +61,7 @@ export default function AddNote(props) {
         props.getall();
       })
       .catch((err) => {
+        toast.error("Note not created");
         console.log("Error = " + err);
       });
 

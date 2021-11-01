@@ -26,6 +26,20 @@ class UserNoteServices {
     });
   };
 
+  static updateNotes = (data) => {
+    const token = localStorage.getItem("token");
+    return Axios.put(`/updateNote/${data.id}`, data, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  };
+
+  static deleteForever = (data) => {
+    const token = localStorage.getItem("token");
+    return Axios.delete(`/deleteNote/${data.id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  };
+
   static forgotPassword = (data) => {
     return Axios.post("http://localhost:8080/forgotPassword", data);
   };
