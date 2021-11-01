@@ -28,14 +28,16 @@ class UserNoteServices {
 
   static updateNotes = (data) => {
     const token = localStorage.getItem("token");
-    return Axios.put(`/updateNote/${data.id}`, data, {
+    console.log("updateToken ::", token);
+    return Axios.put(`http://localhost:8080/updatenotes/${data.id}`, data, {
       headers: { Authorization: `Bearer ${token}` },
     });
   };
 
   static deleteForever = (data) => {
     const token = localStorage.getItem("token");
-    return Axios.delete(`/deleteNote/${data.id}`, {
+    console.log("deleteToken ::", token);
+    return Axios.delete(`http://localhost:8080/deletenotes/${data.id}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
   };

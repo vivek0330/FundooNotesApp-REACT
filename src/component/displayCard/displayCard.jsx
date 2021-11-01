@@ -1,12 +1,10 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import NoteOptions from "../../component/noteOptions/noteOptions";
-// import Services from "../../Services/NotesServices";
 import Dialog from "@material-ui/core/Dialog";
 import AddNote from "../../component/createNote/addNotes";
 import Typography from "@material-ui/core/Typography";
 import "./displayCard.scss";
-// const service = new Services();
 
 const useStyles = makeStyles((theme) => ({
   dialogBox: {
@@ -59,18 +57,10 @@ export default function DisplayNotes(props) {
     setOpen(false);
   };
 
-  //   const notelist = [
-  //     { title: "title1", description: "description1" },
-  //     { title: "title2", description: "description2" },
-  //     { title: "title3", description: "description3" },
-  //   ];
-
   const Note = () => {
     console.log(" props.notes :: ", props.notes);
     return (
       <div className="AllNotes">
-        {/* props.notes */}
-
         {props.notes.length &&
           props.notes.map((data) => (
             <div

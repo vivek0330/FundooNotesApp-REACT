@@ -10,14 +10,13 @@ import ColorLensOutlinedIcon from "@material-ui/icons/ColorLensOutlined";
 import SystemUpdateAltOutlinedIcon from "@material-ui/icons/SystemUpdateAltOutlined";
 import MoreVertOutlinedIcon from "@material-ui/icons/MoreVertOutlined";
 import PublishRoundedIcon from "@material-ui/icons/PublishRounded";
-// import DeleteForeverRoundedIcon from "@material-ui/icons/DeleteForeverRounded";
+import DeleteForeverRoundedIcon from "@material-ui/icons/DeleteForeverRounded";
 import RestoreFromTrashRoundedIcon from "@material-ui/icons/RestoreFromTrashRounded";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Paper from "@material-ui/core/Paper";
 import Services from "../../Services/NotesServices";
 import "./noteOptions.scss";
-//const service = new Services();
 
 const useStyles = makeStyles((theme) => ({
   optionButton: {
@@ -49,6 +48,9 @@ export default function NoteOptions(props) {
   const [open] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [anchorE2, setAnchorE2] = React.useState(null);
+  const [noteId] = React.useState(props.editId);
+  //const [edit, setEdit] = React.useState(props.setEdited);
+  const [archive] = React.useState(props.archive);
   const [trash] = React.useState(props.trash);
 
   const colors = [
@@ -74,6 +76,22 @@ export default function NoteOptions(props) {
     setAnchorE2(null);
   };
 
+  const deleted = () => {
+    let data = {
+      id: [noteId],
+    };
+    console.log("dlt", data);
+    console.log("deleted", noteId);
+    Services.deleteForever(data)
+      .then((data) => {
+        console.log("Note deleted " + data);
+        props.getall();
+      })
+      .catch((err) => {
+        console.log("Error while deleting" + err);
+      });
+  };
+
   const colorsHandleClick = (event) => {
     setAnchorEl(event.currentTarget);
     console.log("setE1 :: ", event.currentTarget);
@@ -85,6 +103,8 @@ export default function NoteOptions(props) {
   };
 
   const passColor = (e, colr) => {};
+
+  const restore = () => {};
 
   const ColorBlock = () => {
     return (
@@ -106,7 +126,10 @@ export default function NoteOptions(props) {
         {trash ? (
           <div>
             <IconButton className={classes.button}>
-              {/* <DeleteForeverRoundedIcon onClick={deleted} /> */}
+              <DeleteForeverRoundedIcon onClick={deleted} />
+            </IconButton>
+            <IconButton className={classes.button}>
+              <RestoreFromTrashRoundedIcon onClick={restore} />
             </IconButton>
           </div>
         ) : (
@@ -120,9 +143,10 @@ export default function NoteOptions(props) {
             <IconButton onClick={colorsHandleClick} className={classes.button}>
               <ColorLensOutlinedIcon />
             </IconButton>
-            <IconButton className={classes.button}>
+            {/* <IconButton className={classes.button}>
               <ImageOutlinedIcon />
-            </IconButton>
+            </IconButton> */}
+
             <IconButton className={classes.button} onClick={deleteHandleOpen}>
               <MoreVertOutlinedIcon />
             </IconButton>
@@ -153,7 +177,7 @@ export default function NoteOptions(props) {
             open={Boolean(anchorE2)}
             onClose={deletesHandleClose}
           >
-            {/* <MenuItem onClick={deleted}>Delete</MenuItem> */}
+            <MenuItem onClick={deleted}>Delete</MenuItem>
           </Menu>
         </Paper>
       </div>

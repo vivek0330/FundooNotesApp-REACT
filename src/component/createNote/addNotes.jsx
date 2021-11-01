@@ -65,12 +65,47 @@ export default function AddNote(props) {
         console.log("Error = " + err);
       });
 
+    // let formData = new FormData();
+
     if (title === undefined && note === undefined) {
       console.log("Please Enter Data");
       setClr("#fafafa");
       titleDisplay(false);
       return null;
     }
+
+    // formData.append("title", title);
+    // console.log("titleAppend", title);
+    // formData.append("description", note);
+
+    // if (edit) {
+    //   console.log("updateId", noteId);
+    //   formData.append("noteId", noteId);
+    //   Services.updateNotes(formData)
+    //     .then((data) => {
+    //       console.log("Update Data: " + data);
+    //       props.getall();
+    //     })
+    //     .catch((err) => {
+    //       console.log("Update Data Error = " + err);
+    //     });
+    //   titleDisplay(false);
+    //   props.dialogOff();
+    // } else {
+    //   console.log("addnote", formData);
+    //   Services.addNote(formData)
+    //     .then((data) => {
+    //       console.log("Add Notes: " + data);
+    //       props.getall();
+    //     })
+    //     .catch((err) => {
+    //       console.log("Error = " + err);
+    //     });
+    //   setTitle("");
+    //   setNote("");
+    //   setClr("#fafafa");
+    //   titleDisplay(false);
+    // }
   };
 
   return (
@@ -105,7 +140,7 @@ export default function AddNote(props) {
             />
           </div>
           <div style={{ display: showTitle ? "none" : "block" }}>
-            <IconButton>
+            {/* <IconButton>
               <CheckBoxOutlinedIcon />
             </IconButton>
             <IconButton>
@@ -113,7 +148,7 @@ export default function AddNote(props) {
             </IconButton>
             <IconButton>
               <ImageOutlinedIcon />
-            </IconButton>
+            </IconButton> */}
           </div>
         </div>
         <ToastContainer />
@@ -139,7 +174,7 @@ export default function AddNote(props) {
             <div className="closeNotes">
               {" "}
               <IconButton className={classes.closeNotes} onClick={closeNote}>
-                CLOSE
+                Add
               </IconButton>
             </div>
           )}
