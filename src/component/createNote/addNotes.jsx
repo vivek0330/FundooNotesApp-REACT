@@ -110,6 +110,7 @@ export default function AddNote(props) {
 
   return (
     <div
+      data-testId="close"
       className="addNotesMain"
       onClickAway={closeNote}
       style={{ backgroundColor: clr }}
@@ -119,7 +120,11 @@ export default function AddNote(props) {
           className="addNoteField"
           style={{ display: showTitle ? "block" : "none" }}
         >
-          <div className="titleInput" className={classes.titleInput}>
+          <div
+            className="titleInput"
+            data-testid="title"
+            className={classes.titleInput}
+          >
             <InputBase
               className={classes.input}
               placeholder="Title"
@@ -130,7 +135,7 @@ export default function AddNote(props) {
           </div>
         </div>
         <div class="simpleNoteShow">
-          <div className="noteInput">
+          <div className="noteInput" data-testid="description">
             <InputBase
               className={classes.input}
               placeholder="Take a note..."
@@ -157,7 +162,7 @@ export default function AddNote(props) {
         className="addNoteField"
         style={{ display: showTitle ? "block" : "none" }}
       >
-        <div className="addNoteOptions">
+        <div className="addNoteOptions" data-testid="editId">
           <NoteOptions
             setClr={setClr}
             setEdited={edit}
@@ -171,7 +176,7 @@ export default function AddNote(props) {
           {trash ? (
             " "
           ) : (
-            <div className="closeNotes">
+            <div className="closeNotes" data-testid="Save">
               {" "}
               <IconButton className={classes.closeNotes} onClick={closeNote}>
                 Add
